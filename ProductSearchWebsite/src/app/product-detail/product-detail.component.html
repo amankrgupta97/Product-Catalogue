@@ -1,0 +1,34 @@
+<h2 mat-dialog-title [align]="'center'">Product Details</h2>
+<div mat-dialog-content>
+  <mat-card class="example-card">
+    <mat-card-title-group>
+      <mat-card-title>{{ product.name }}</mat-card-title>
+      <mat-card-subtitle>{{ product.brand }}</mat-card-subtitle>
+      <mat-card-subtitle>Rs.{{ product.price }}</mat-card-subtitle>
+      <mat-card-subtitle>{{ product.description }}</mat-card-subtitle>
+      <img mat-card-xl-image src="data:image/JPEG;base64,{{ product.image }}" />
+    </mat-card-title-group>
+    <mat-card-content>
+      <form [formGroup]="availabiltyForm" (ngSubmit)="checkAvailability()">
+        <mat-form-field appearance="outline">
+          <mat-label>Pincode</mat-label>
+          <input
+            formControlName="pincode"
+            matInput
+            type="number"
+            placeholder="Enter pincode"
+          />
+        </mat-form-field>
+        <span class="deliver-msg" *ngIf="message"
+          >Will be deliver in {{ daysToReach }} days</span
+        >
+        <div>
+          <button type="submit" mat-raised-button>check</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+<div mat-dialog-actions [align]="'end'">
+  <button mat-raised-button color="warn" mat-dialog-close>Close</button>
+</div>

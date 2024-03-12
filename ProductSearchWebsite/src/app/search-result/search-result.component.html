@@ -1,0 +1,61 @@
+<div>
+  <mat-toolbar color="accent">
+    <span class="me-2">Product Catalogue</span>
+    <div class="d-flex form-group">
+      <input
+        class="form-control me-2"
+        type="search"
+        placeholder="filter your product"
+        aria-label="Search"
+        [(ngModel)]="filterTerm"
+      />
+    </div>
+    <span class="example-spacer"></span>
+    <button
+      *ngIf="isloggedIn()"
+      mat-raised-button
+      color="primary"
+      (click)="logout()"
+    >
+      Logout
+    </button>
+    <button
+      *ngIf="!isloggedIn()"
+      mat-raised-button
+      color="primary"
+      (click)="loginForm()"
+    >
+      Login</button
+    >&nbsp;
+    <button mat-raised-button *ngIf="!isloggedIn()" (click)="registerForm()">
+      Register
+    </button>
+  </mat-toolbar>
+</div>
+<div [align]="'center'">
+  <mat-card
+    *ngFor="let product of foundProducts | filter: filterTerm"
+    class="example-card"
+  >
+    <mat-card-title-group>
+      <mat-card-title>{{ product.name }}</mat-card-title>
+      <mat-card-subtitle>{{ product.brand }}</mat-card-subtitle>
+      <mat-card-subtitle *ngIf="isloggedIn()"
+        >Rs.{{ product.price }}</mat-card-subtitle
+      >
+      <img mat-card-lg-image src="data:image/JPEG;base64,{{ product.image }}" />
+    </mat-card-title-group>
+    <div [align]="'start'">
+      <mat-card-content>
+        <button
+          [disabled]="!isloggedIn()"
+          mat-raised-button
+          color="warn"
+          (click)="openDetails(product)"
+        >
+          View Details
+        </button>
+      </mat-card-content>
+    </div>
+  </mat-card>
+</div>

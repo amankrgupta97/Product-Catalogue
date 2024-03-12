@@ -1,0 +1,51 @@
+<h2 mat-dialog-title [align]="'center'">Login</h2>
+<div mat-dialog-content>
+  <form [formGroup]="loginForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input
+        formControlName="email"
+        [formControl]="emailControl"
+        matInput
+        type="email"
+        placeholder="Enter Your Registered Email"
+      />
+      <mat-error
+        *ngIf="
+          emailControl.hasError('email') && !emailControl.hasError('required')
+        "
+      >
+        Please enter a valid email address
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input
+        formControlName="password"
+        [formControl]="passwordControl"
+        matInput
+        type="password"
+        placeholder="Enter Your Password"
+      />
+      <mat-error
+        *ngIf="
+          passwordControl.hasError('minlength') &&
+          !passwordControl.hasError('required')
+        "
+      >
+        Please enter a valid password
+      </mat-error>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions [align]="'end'">
+  <button mat-raised-button color="warn" mat-dialog-close>Close</button>
+  <button
+    mat-raised-button
+    color="primary"
+    mat-dialog-close=""
+    (click)="loginUser()"
+  >
+    Login
+  </button>
+</div>

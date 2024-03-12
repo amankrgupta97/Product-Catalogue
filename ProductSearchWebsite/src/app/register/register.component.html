@@ -1,0 +1,106 @@
+<h2 mat-dialog-title>Registration Form</h2>
+<div mat-dialog-content>
+  <form [formGroup]="registerForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input
+        formControlName="email"
+        matInput
+        type="email"
+        placeholder="Enter Your Email"
+      />
+      <mat-error
+        *ngIf="
+          registerForm.controls['email'].hasError('email') &&
+          !registerForm.controls['email'].hasError('required')
+        "
+      >
+        Please enter a valid email address
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>First Name</mat-label>
+      <input
+        formControlName="firstName"
+        [formControl]="firstNameControl"
+        matInput
+        type="text"
+        placeholder="Enter Your First Name"
+      />
+      <mat-error
+        *ngIf="
+          firstNameControl.hasError('pattern') &&
+          !firstNameControl.hasError('required')
+        "
+      >
+        Please enter a valid Name
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Last Name</mat-label>
+      <input
+        formControlName="lastName"
+        [formControl]="lastNameControl"
+        matInput
+        type="text"
+        placeholder="Enter Your Last Name"
+      />
+      <mat-error
+        *ngIf="
+          lastNameControl.hasError('pattern') &&
+          !lastNameControl.hasError('required')
+        "
+      >
+        Please enter a valid Name
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input
+        formControlName="password"
+        [formControl]="passwordControl"
+        matInput
+        type="password"
+        placeholder="Create your Password"
+      />
+      <mat-error
+        *ngIf="
+          passwordControl.hasError('pattern') &&
+          !passwordControl.hasError('required')
+        "
+      >
+        Password must have at least 8 characters uppercase,lowercase
+        character,number and special character
+      </mat-error>
+    </mat-form-field>
+    &nbsp;
+    <mat-form-field appearance="outline">
+      <mat-label>Confirm Password</mat-label>
+      <input
+        formControlName="confirmPassword"
+        matInput
+        type="password"
+        placeholder="Re-Enter Password"
+      />
+      <mat-error
+        *ngIf="
+          registerForm.controls['confirmPassword'].hasError('mustMatch') &&
+          !registerForm.controls['confirmPassword'].hasError('required')
+        "
+      >
+        Password mismatch
+      </mat-error>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions [align]="'end'">
+  <button mat-raised-button color="warn" mat-dialog-close>Close</button>
+  <button
+    mat-raised-button
+    color="primary"
+    mat-dialog-close
+    (click)="registerUser()"
+  >
+    Register
+  </button>
+</div>
